@@ -7,9 +7,6 @@ __pycache__/
 .venv/
 venv/
 
-# Model files
-saved_models/
-*.pkl
 
 # Streamlit cache
 .streamlit/
@@ -26,3 +23,6 @@ Thumbs.db
 
 # Environment variables
 .env
+
+__pycache__/
+*.pyc

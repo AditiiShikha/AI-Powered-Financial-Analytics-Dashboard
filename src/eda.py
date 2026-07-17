@@ -1,59 +1,24 @@
 import pandas as pd
 
 
+# Calculate dashboard KPIs
+
 def calculate_kpis(df):
-    """
-    Calculate dashboard KPI metrics.
-    """
-
-    total_sales = df["Sales"].sum()
-    total_profit = df["Profit"].sum()
-    average_discount = df["Discount"].mean()
-    total_orders = len(df)
-
-    profit_margin = (total_profit / total_sales) * 100
 
     return {
-        "Total Sales": round(total_sales, 2),
-        "Total Profit": round(total_profit, 2),
-        "Average Discount": round(average_discount * 100, 2),
-        "Total Orders": total_orders,
-        "Profit Margin": round(profit_margin, 2)
+        "Total Sales": df["Sales"].sum(),
+        "Total Profit": df["Profit"].sum(),
+        "Average Discount": df["Discount"].mean() * 100,
+        "Total Orders": len(df),
+        "Profit Margin": (
+            df["Profit"].sum() / df["Sales"].sum()
+        ) * 100
     }
 
 
-def revenue_trend(df):
-    """
-    Monthly revenue trend.
-    """
-
-    revenue = (
-        df.groupby("Order Month")["Sales"]
-        .sum()
-        .sort_index()
-    )
-
-    return revenue
-
-
-def profit_trend(df):
-    """
-    Monthly profit trend.
-    """
-
-    profit = (
-        df.groupby("Order Month")["Profit"]
-        .sum()
-        .sort_index()
-    )
-
-    return profit
-
+# Sales by category
 
 def sales_by_category(df):
-    """
-    Total sales by category.
-    """
 
     return (
         df.groupby("Category")["Sales"]
@@ -62,10 +27,9 @@ def sales_by_category(df):
     )
 
 
+# Profit by category
+
 def profit_by_category(df):
-    """
-    Total profit by category.
-    """
 
     return (
         df.groupby("Category")["Profit"]
@@ -74,40 +38,91 @@ def profit_by_category(df):
     )
 
 
+# Sales by state
+
 def sales_by_state(df):
-    """
-    Top 10 states by sales.
-    """
 
     return (
         df.groupby("State")["Sales"]
         .sum()
         .sort_values(ascending=False)
-        .head(10)
     )
 
 
+# Profit by state
+
 def profit_by_state(df):
-    """
-    Top 10 states by profit.
-    """
 
     return (
         df.groupby("State")["Profit"]
         .sum()
         .sort_values(ascending=False)
+    )
+
+
+# Sales by region
+
+def sales_by_region(df):
+
+    return (
+        df.groupby("Region")["Sales"]
+        .sum()
+        .sort_values(ascending=False)
+    )
+
+
+# Profit by region
+
+def profit_by_region(df):
+
+    return (
+        df.groupby("Region")["Profit"]
+        .sum()
+        .sort_values(ascending=False)
+    )
+
+
+# Monthly sales
+
+def monthly_sales(df):
+
+    return (
+        df.groupby("Order Month")["Sales"]
+        .sum()
+        .sort_index()
+    )
+
+
+# Monthly profit
+
+def monthly_profit(df):
+
+    return (
+        df.groupby("Order Month")["Profit"]
+        .sum()
+        .sort_index()
+    )
+
+
+# Top selling products
+
+def top_products(df):
+
+    return (
+        df.groupby("Sub-Category")["Sales"]
+        .sum()
+        .sort_values(ascending=False)
         .head(10)
     )
 
 
-def top_products(df):
-    """
-    Top 5 product sub-categories by profit.
-    """
+# Top profitable products
+
+def top_profit_products(df):
 
     return (
         df.groupby("Sub-Category")["Profit"]
         .sum()
         .sort_values(ascending=False)
-        .head(5)
+        .head(10)
     )

@@ -19,8 +19,29 @@ def preprocess_data(df):
     df["Ship Month"] = df["Ship Date"].dt.month
     df["Ship Day"] = df["Ship Date"].dt.day
 
-    df = df.drop(columns=["Order Date", "Ship Date"])
+    # Shipping time in days
+    df["Shipping Time"] = (
+    df["Ship Date"] - df["Order Date"]
+).dt.days
 
+# Discount amount
+    df["Discount Amount"] = (
+    df["Sales"] * df["Discount"]
+)
+
+# Average selling price per unit
+    df["Unit Price"] = (
+    df["Sales"] / df["Quantity"]
+)
+
+    
+
+    df = df.drop(
+    columns=[
+        "Order Date",
+        "Ship Date"
+    ]
+)
     # Drop unnecessary columns
     columns_to_drop = [
         "Row ID",

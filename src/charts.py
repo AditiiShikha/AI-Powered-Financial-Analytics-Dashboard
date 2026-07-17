@@ -1,172 +1,183 @@
 import plotly.express as px
 
 
-def revenue_trend_chart(revenue_data):
-    """
-    Revenue trend chart.
-    """
-
-    fig = px.line(
-        x=revenue_data.index,
-        y=revenue_data.values,
-        markers=True,
-        title="Revenue Trend",
-        labels={
-            "x": "Month",
-            "y": "Revenue"
-        }
-    )
-
-    fig.update_layout(
-        template="plotly_white",
-        height=400
-    )
-
-    return fig
-
-
-def profit_trend_chart(profit_data):
-    """
-    Profit trend chart.
-    """
-
-    fig = px.line(
-        x=profit_data.index,
-        y=profit_data.values,
-        markers=True,
-        title="Profit Trend",
-        labels={
-            "x": "Month",
-            "y": "Profit"
-        }
-    )
-
-    fig.update_layout(
-        template="plotly_white",
-        height=400
-    )
-
-    return fig
-
+# Sales by category
 
 def sales_category_chart(sales_data):
-    """
-    Sales by category.
-    """
 
     fig = px.bar(
         x=sales_data.index,
         y=sales_data.values,
-        title="Sales by Category",
         labels={
             "x": "Category",
-            "y": "Sales"
+            "y": "Total Sales"
         },
-        color_discrete_sequence=["#2563EB"]
+        title="Sales by Category"
     )
 
     fig.update_layout(
-        template="plotly_white",
-        height=400
+        xaxis_title="Category",
+        yaxis_title="Sales"
     )
 
     return fig
 
 
+# Profit by category
+
 def profit_category_chart(profit_data):
-    """
-    Profit by category.
-    """
 
     fig = px.bar(
         x=profit_data.index,
         y=profit_data.values,
-        title="Profit by Category",
         labels={
             "x": "Category",
-            "y": "Profit"
+            "y": "Total Profit"
         },
-        color_discrete_sequence=["#10B981"]
+        title="Profit by Category"
     )
 
     fig.update_layout(
-        template="plotly_white",
-        height=400
+        xaxis_title="Category",
+        yaxis_title="Profit"
     )
 
     return fig
 
+
+# Sales by state
 
 def sales_state_chart(sales_data):
-    """
-    Top states by sales.
-    """
 
     fig = px.bar(
-        x=sales_data.values,
-        y=sales_data.index,
-        orientation="h",
-        title="Top 10 States by Sales",
+        x=sales_data.index,
+        y=sales_data.values,
         labels={
-            "x": "Sales",
-            "y": "State"
+            "x": "State",
+            "y": "Total Sales"
         },
-        color_discrete_sequence=["#2563EB"]
+        title="Sales by State"
     )
 
     fig.update_layout(
-        template="plotly_white",
-        height=400
+        xaxis_title="State",
+        yaxis_title="Sales"
     )
 
     return fig
 
+
+# Profit by state
 
 def profit_state_chart(profit_data):
-    """
-    Top states by profit.
-    """
 
     fig = px.bar(
-        x=profit_data.values,
-        y=profit_data.index,
-        orientation="h",
-        title="Top 10 States by Profit",
+        x=profit_data.index,
+        y=profit_data.values,
         labels={
-            "x": "Profit",
-            "y": "State"
+            "x": "State",
+            "y": "Total Profit"
         },
-        color_discrete_sequence=["#10B981"]
+        title="Profit by State"
     )
 
     fig.update_layout(
-        template="plotly_white",
-        height=400
+        xaxis_title="State",
+        yaxis_title="Profit"
     )
 
     return fig
 
 
-def top_products_chart(products):
-    """
-    Top products by profit.
-    """
+# Monthly sales trend
+
+def monthly_sales_chart(monthly_sales):
+
+    fig = px.line(
+        x=monthly_sales.index,
+        y=monthly_sales.values,
+        markers=True,
+        labels={
+            "x": "Month",
+            "y": "Sales"
+        },
+        title="Monthly Sales Trend"
+    )
+
+    fig.update_layout(
+        xaxis_title="Month",
+        yaxis_title="Sales"
+    )
+
+    return fig
+
+
+# Monthly profit trend
+
+def monthly_profit_chart(monthly_profit):
+
+    fig = px.line(
+        x=monthly_profit.index,
+        y=monthly_profit.values,
+        markers=True,
+        labels={
+            "x": "Month",
+            "y": "Profit"
+        },
+        title="Monthly Profit Trend"
+    )
+
+    fig.update_layout(
+        xaxis_title="Month",
+        yaxis_title="Profit"
+    )
+
+    return fig
+
+
+# Top selling products
+
+def top_products_chart(product_data):
 
     fig = px.bar(
-        x=products.values,
-        y=products.index,
+        x=product_data.values,
+        y=product_data.index,
         orientation="h",
-        title="Top 5 Product Sub-Categories by Profit",
+        labels={
+            "x": "Sales",
+            "y": "Sub-Category"
+        },
+        title="Top Selling Products"
+    )
+
+    fig.update_layout(
+        yaxis=dict(
+            categoryorder="total ascending"
+        )
+    )
+
+    return fig
+
+
+# Top profitable products
+
+def top_profit_products_chart(product_data):
+
+    fig = px.bar(
+        x=product_data.values,
+        y=product_data.index,
+        orientation="h",
         labels={
             "x": "Profit",
             "y": "Sub-Category"
         },
-        color_discrete_sequence=["#F59E0B"]
+        title="Top Profitable Products"
     )
 
     fig.update_layout(
-        template="plotly_white",
-        height=400
+        yaxis=dict(
+            categoryorder="total descending"
+        )
     )
 
     return fig
