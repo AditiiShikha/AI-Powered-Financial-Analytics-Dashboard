@@ -27,7 +27,6 @@ from src.charts import (
 
 st.set_page_config(
     page_title="AI-Powered Financial Analytics Dashboard",
-    page_icon="📊",
     layout="wide"
 )
 
